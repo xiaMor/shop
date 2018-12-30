@@ -1,0 +1,12 @@
+body,
+h2,
+ul,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+}
