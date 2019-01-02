@@ -17,7 +17,7 @@
         <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened>
             <!-- 菜单一 -->
            <el-submenu index="1">
-            <template slot="title">
+            <template slot="title" @click="getUser()">
               <i class="el-icon-star-on"></i>
               <span>用户管理</span>
             </template>
@@ -90,7 +90,9 @@
           </el-submenu>
         </el-menu>       
       </el-aside>
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -108,6 +110,7 @@ export default {
     }
   },
   methods: {
+    
     //退出
     loginOut() {
       //清除localStorage

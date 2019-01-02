@@ -10,11 +10,18 @@ import '@/assets/index.css'
 //导入自定义插件
 import Http from './chajian/http'
 
+import moment from 'moment'
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 //使用自定义插件
 Vue.use(Http)
+
+//声明一个全局过滤器,处理时间
+Vue.filter('fmtDate', (v) => {
+    return moment(v).format('YYYY-MM-DD')
+})
 
 /* eslint-disable no-new */
 new Vue({
