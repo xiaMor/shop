@@ -8,7 +8,7 @@
         <h2>电商后台管理系统</h2>
       </el-col>
       <el-col :span="1">
-        <a href="#">退出</a>
+        <a href="#" @click.prevent="loginOut()">退出</a>
       </el-col>
     </el-header>
     <el-container>
@@ -96,7 +96,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  beforeCreate() {
+    //在创建之前先验证是否可以查看首页
+    if(!localStorage.getItem('token')) {
+      //如果没有，则没有登录
+      this.$router.push({
+        name: 'login'
+      })
+      this.$message.warning('请先登录')
+    }
+  },
+  methods: {
+    //退出
+    loginOut() {
+      //清除localStorage
+      localStorage.clear();
+      //改标识到登录页
+      this.$router.push({
+        name: 'login'
+      })
+      //提示
+      this.$message.success('退出成功')
+    }
+  }
+};
 </script>
 
 <style>
@@ -115,7 +139,5 @@ export default {};
   text-decoration: none;
   line-height: 60px;
 }
-.main {
-  background-color: rgb(50, 151, 146);
-}
+
 </style>
