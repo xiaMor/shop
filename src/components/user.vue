@@ -282,7 +282,7 @@ export default {
 
       const res = await this.$http.get(`users?
         query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`);
-      //   console.log(res);
+        // console.log(res);
       const {
         data: { users, total },
         meta: { status, msg }

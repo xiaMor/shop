@@ -12,6 +12,11 @@ import Http from './chajian/http'
 
 import moment from 'moment'
 
+//导入面包屑自定义组件
+import Bread from '@/components/cusBrend'
+
+//定义全局组件，使用面包屑组件
+Vue.component(Bread.name, Bread)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

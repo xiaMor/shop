@@ -29,6 +29,7 @@ export default {
       const res = await this.$http.post('login',this.formdata) 
       // this.$http.post('login',this.formdata).then((res)=>{})    
         const {data:{data,meta:{msg,status}}} = res;
+        // console.log(res)
         if(status == 200) {
           //当登录成功时，保存token的值
           localStorage.setItem('token', data.token);

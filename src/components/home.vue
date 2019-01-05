@@ -13,77 +13,16 @@
     </el-header>
     <el-container>
       <el-aside width="200px" class="aside">
-        <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened>
-          <!-- 菜单一 -->
-          <el-submenu index="1">
+        <el-menu default-active="2" router :unique-opened="true">
+          <!-- 菜单 -->
+          <el-submenu :index="''+item1.order" v-for="(item1) in menus" :key="item1.id">
             <template slot="title">
               <i class="el-icon-star-on"></i>
-              <span>用户管理</span>
+              <span>{{item1.authName}}</span>
             </template>
-            <el-menu-item index="user">
+            <el-menu-item index="user" v-for="(item2) in item1.children" :key="item2.id">
               <i class="el-icon-menu"></i>
-              用户列表
-            </el-menu-item>
-          </el-submenu>
-          <!-- 2 -->
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-star-on"></i>
-              <span>权限管理</span>
-            </template>
-
-            <el-menu-item index="2-1">
-              <i class="el-icon-menu"></i>
-              角色列表
-            </el-menu-item>
-
-            <el-menu-item index="2-2">
-              <i class="el-icon-menu"></i>
-              权限列表
-            </el-menu-item>
-          </el-submenu>
-          <!-- 3 -->
-          <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-star-on"></i>
-              <span>商品管理</span>
-            </template>
-
-            <el-menu-item index="3-1">
-              <i class="el-icon-menu"></i>
-              商品列表
-            </el-menu-item>
-            <el-menu-item index="3-2">
-              <i class="el-icon-menu"></i>
-              分类参数
-            </el-menu-item>
-            <el-menu-item index="3-3">
-              <i class="el-icon-menu"></i>
-              商品分类
-            </el-menu-item>
-          </el-submenu>
-          <!-- 4 -->
-          <el-submenu index="4">
-            <template slot="title">
-              <i class="el-icon-star-on"></i>
-              <span>订单管理</span>
-            </template>
-
-            <el-menu-item index="4-1">
-              <i class="el-icon-menu"></i>
-              订单列表
-            </el-menu-item>
-          </el-submenu>
-          <!-- 5 -->
-          <el-submenu index="5">
-            <template slot="title">
-              <i class="el-icon-star-on"></i>
-              <span>数据统计</span>
-            </template>
-
-            <el-menu-item index="5-1">
-              <i class="el-icon-menu"></i>
-              数据报表
+              {{item2.authName}}
             </el-menu-item>
           </el-submenu>
         </el-menu>
@@ -97,23 +36,36 @@
 
 <script>
 export default {
-  beforeCreate() {
-    //在创建之前先验证是否可以查看首页
-    if (!localStorage.getItem("token")) {
-      //如果没有，则没有登录
-      this.$router.push({
-        name: "login"
-      });
-      this.$message.warning("请先登录");
+  data() {
+    return {
+      menus: []
     }
   },
+  // beforeCreate() {
+  //   //在创建之前先验证是否可以查看首页
+  //   if (!localStorage.getItem("token")) {
+  //     //如果没有，则没有登录
+  //     this.$router.push({
+  //       name: "login"
+  //     });
+  //     this.$message.warning("请先登录");
+  //   }
+  // },
+  created() {
+    this.getMenus()
+  },
   methods: {
+    async getMenus() {
+      const res = await this.$http.get(`menus`);
+      // console.log(res)
+      this.menus = res.data.data
+    },
     //退出
     loginOut() {
       //清除localStorage
       localStorage.clear();
       //改标识到登录页
-      this.$router.push({
+      this.$router.push({ 
         name: "login"
       });
       //提示
