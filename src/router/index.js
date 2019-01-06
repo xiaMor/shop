@@ -6,6 +6,8 @@ import User from '@/components/user'
 import Rights from '@/components/rights'
 import Roles from '@/components/roles'
 import { Message } from 'element-ui';
+import Goods from '@/components/goodslist'
+import Goodsadd from '@/components/goodsadd'
 
 
 
@@ -22,7 +24,7 @@ const router = new Router({
         component: Home,
         children: [{
                 name: 'user',
-                path: '/user',
+                path: '/users',
                 component: User
             },
             {
@@ -33,6 +35,15 @@ const router = new Router({
                 name: 'roles',
                 path: '/roles',
                 component: Roles
+            },
+            {
+                name: 'goods',
+                path: '/goods',
+                component: Goods
+            }, {
+                name: 'goodsadd',
+                path: '/goodsadd',
+                component: Goodsadd
             }
         ]
     }]

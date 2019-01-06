@@ -14,7 +14,7 @@
 
     <!-- 表格 -->
   <el-table
-      height="450px"
+      height="430px"
       border
       stripe
        v-loading="loading"
@@ -53,7 +53,7 @@
 
       <el-table-column
         label="操作" width="100">
-        <template slot-scope="scope">
+        <template><!-- slot-scope="scope" -->
         <el-button  plain size="mini" type="primary" icon="el-icon-edit" circle></el-button>
         <el-button  plain size="mini" type="danger" icon="el-icon-delete" circle></el-button>
         </template>

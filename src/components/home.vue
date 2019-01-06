@@ -20,7 +20,7 @@
               <i class="el-icon-star-on"></i>
               <span>{{item1.authName}}</span>
             </template>
-            <el-menu-item index="user" v-for="(item2) in item1.children" :key="item2.id">
+            <el-menu-item :index="item2.path" v-for="(item2) in item1.children" :key="item2.id">
               <i class="el-icon-menu"></i>
               {{item2.authName}}
             </el-menu-item>
