@@ -1,19 +1,39 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import Login from '@/components/login'
-import Home from '@/components/home'
-import User from '@/components/user'
-import Rights from '@/components/rights'
-import Roles from '@/components/roles'
-import { Message } from 'element-ui';
-import Goods from '@/components/goodslist'
-import Goodsadd from '@/components/goodsadd'
+import VueRouter from 'vue-router'
+// 懒加载写法 ->
+// const Foo = () =>
+//     import ('./Foo.vue')
+const Login = () =>
+    import ('@/components/login')
+const Home = () =>
+    import ('@/components/home')
+const User = () =>
+    import ('@/components/user')
+const Rights = () =>
+    import ('@/components/rights')
+const Roles = () =>
+    import ('@/components/roles')
+const Goods = () =>
+    import ('@/components/goodslist')
+const Goodsadd = () =>
+    import ('@/components/goodsadd')
+const Params = () =>
+    import ('@/components/params')
+const Goodscate = () =>
+    import ('@/components/goodscate.vue')
+const Orders = () =>
+    import ('@/components/order.vue')
+const Report = () =>
+    import ('@/components/report.vue')
 
+// 单独引入组件
+import {
+    Message
+} from 'element-ui';
 
+Vue.use(VueRouter)
 
-Vue.use(Router)
-
-const router = new Router({
+const router = new VueRouter({
     routes: [{
         name: 'login',
         path: '/login',
@@ -44,6 +64,24 @@ const router = new Router({
                 name: 'goodsadd',
                 path: '/goodsadd',
                 component: Goodsadd
+            }, {
+                name: 'params',
+                path: '/params',
+                component: Params
+            }, {
+                name: 'categories',
+                path: '/categories',
+                component: Goodscate
+            },
+            {
+                name: 'orders',
+                path: '/orders',
+                component: Orders
+            },
+            {
+                name: 'reports',
+                path: '/reports',
+                component: Report
             }
         ]
     }]
@@ -59,6 +97,9 @@ router.beforeEach((to, from, next) => {
         const token = localStorage.getItem('token');
         if (!token) {
             Message.warning('请先登录')
+            router.push({
+                name: 'login'
+            })
         } else {
             next()
         }
